@@ -1,7 +1,7 @@
-const fs = require('fs');
-const { pipeline } = require('stream');
+import fs from 'fs';
+import { pipeline } from 'stream';
 
-const csv = require('csvtojson');
+import csv from 'csvtojson';
 
 const csvFilePath = './task2/csv/ex1.csv';
 const csvOutputFilePath = './task2/csv/csvOutputFile.txt';

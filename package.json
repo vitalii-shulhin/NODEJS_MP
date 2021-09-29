@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx babel script.js -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "task1": "nodemon ./task1/task1.js",
-    "task2": "nodemon ./task2/task2.js"
+    "task1": "nodemon ./task1/task1.js --exec babel-node",
+    "task2": "nodemon ./task2/task2.js --exec babel-node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
     "nodemon": "^2.0.13"
   },
   "dependencies": {

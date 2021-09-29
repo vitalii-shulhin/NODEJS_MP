@@ -1,14 +1,12 @@
-const readline = require('readline');
-const process = require('process');
+import readline from 'readline';
+import process from 'process';
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-console.log('\n');
-console.log('Reverse of Sring in NodeJS');
-console.log('\n');
+console.log('\n Reverse of Sring in NodeJS \n');
 
 rl.prompt();
 
