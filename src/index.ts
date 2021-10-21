@@ -1,5 +1,5 @@
 import express from 'express';
-import { usersRouter } from './user/users.router';
+import { usersRouter } from './routes/users.router';
 import { errorHandler } from './middleware/error.middleware';
 
 const app = express();

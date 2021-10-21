@@ -1,4 +1,3 @@
-
 export type User = {
   login: string,
   password: string,
@@ -7,7 +6,7 @@ export type User = {
 
 export type BaseUser = User & {
   id: string,
-  isDelete: boolean,
+  isdeleted: boolean,
 };
 
 export type Users = {
