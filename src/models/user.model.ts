@@ -3,13 +3,12 @@ import { sequelize } from '../data-access/pgConnect';
 import { BaseUser } from '../types/user.types';
 
 export interface IUserModel extends Model<BaseUser> {}
-
 export class UserModel extends Model<BaseUser> {}
 
 export default UserModel.init(
   {
     id: {
-      type: DataTypes.CHAR,
+      type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
     },

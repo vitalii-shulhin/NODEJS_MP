@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { Op } from 'sequelize';
 
 import { User } from '../types/user.types';
@@ -17,8 +17,8 @@ export class UserService implements IUserService {
 
   constructor(private userServise: typeof userModel) {}
 
-  findAll = async (withDeleted = false) => {
-    const user = await this.userServise.findAll({
+  findAll = (withDeleted = false) => {
+    return this.userServise.findAll({
       raw: true,
       ...(withDeleted ? {} : {
         where: {
@@ -26,26 +26,22 @@ export class UserService implements IUserService {
         },
       }),
     });
-
-    return user;
   }
 
-  find = async (userID: string) => {
-    const user = await this.userServise.findOne({
+  find = (userID: string) => {
+    return this.userServise.findOne({
       plain: true,
       where: {
         id: userID,
         isdeleted: false,
       },
     });
-
-    return user;
   }
 
   create = (newUser: User) => {
     return this.userServise.create({
       ...newUser,
-      id: uuidv4(),
+      id: uuid(),
       isdeleted: false,
     });
   }
