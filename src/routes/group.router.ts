@@ -21,4 +21,7 @@ router.delete('/:id', GroupController.delete);
 // POST  /api/group/add_users
 router.post('/add_users', GroupController.addUsersToGroup);
 
+// POST  /api/group/get_user_group/:groupId
+router.get('/get_user_group/:groupId', GroupController.getUserGroup);
+
 export const groupRouter = router;

@@ -11,6 +11,7 @@ interface IGroupService {
   update: (id: string, groupUpdate: Group) => Promise<[number, GroupModel[]]>;
   delete: (id: string) => Promise<number>;
   addUsersToGroup: (groupid: string, userids: string[]) => Promise<void>;
+  getUserGroup: (groupid: string) => Promise<UserGroupModel[]>;
 }
 
 export class GroupService implements IGroupService {
@@ -57,5 +58,13 @@ export class GroupService implements IGroupService {
       await transaction.rollback();
       throw err;
     }
+  }
+
+  getUserGroup = (groupid: string) => {
+    return this.userGroupServise.findAll({
+      where: {
+        groupid,
+      },
+    });
   }
 }

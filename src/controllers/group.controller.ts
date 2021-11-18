@@ -14,6 +14,7 @@ interface IGroupController {
   update: (req: Request, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
   delete: (req: Request, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
   addUsersToGroup: (req: Request, res: Response) => Promise<void>;
+  getUserGroup: (req: Request, res: Response) => Promise<void>;
 }
 
 class GroupController implements IGroupController {
@@ -92,6 +93,18 @@ class GroupController implements IGroupController {
       const group = await groupService.addUsersToGroup(groupid, userids);
 
       res.status(200).send(group);
+    } catch (err) {
+      res.status(500).send((err as Error).message);
+    }
+  }
+
+  getUserGroup = async (req: Request, res: Response) => {
+    const { groupId } = req.params;
+
+    try {
+      const groupList = await groupService.getUserGroup(groupId);
+
+      res.status(200).send(groupList);
     } catch (err) {
       res.status(500).send((err as Error).message);
     }
