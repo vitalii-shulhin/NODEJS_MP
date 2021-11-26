@@ -10,6 +10,7 @@ import {
   IUserRequestBodyParams,
 } from '../validations/joi.validation';
 import { User } from '../types/user.types';
+import { logger } from '../common/logger';
 
 const userService = new UserService(UserModel);
 const userNotFound = 'User not found';
@@ -38,7 +39,10 @@ class UserController implements IUserController {
 
       res.status(200).send(users);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({ errorMessage, methodName: 'UserController.getAllUsers' });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -54,7 +58,14 @@ class UserController implements IUserController {
 
       res.status(200).json(autoSuggestedUserList);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'UserController.getAutoSuggestUsers',
+        arguments: req.query,
+      });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -70,7 +81,10 @@ class UserController implements IUserController {
 
       res.status(404).send(userNotFound);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({ errorMessage, methodName: 'UserController.getUser', arguments: req.params });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -81,7 +95,10 @@ class UserController implements IUserController {
 
       res.status(201).json(newUser);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({ errorMessage, methodName: 'UserController.createUser', arguments: req.body });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -98,7 +115,14 @@ class UserController implements IUserController {
 
       res.status(404).send(userNotFound);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'UserController.updateUser',
+        arguments: { body: req.body, params: req.params },
+      });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -114,7 +138,14 @@ class UserController implements IUserController {
 
       res.status(404).send(userNotFound);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'UserController.deleteUser',
+        arguments: req.params,
+      });
+      res.status(500).send(errorMessage);
     }
   }
 }

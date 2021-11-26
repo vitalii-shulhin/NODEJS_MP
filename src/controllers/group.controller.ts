@@ -3,6 +3,7 @@ import { GroupService } from '../services/group.service';
 import UserGroupModel from '../models/user.group.model';
 import GroupModel from '../models/group.model';
 import { Group } from '../types/group.types';
+import { logger } from '../common/logger';
 
 const groupService = new GroupService(GroupModel, UserGroupModel);
 const groupNotFound = 'Group not found';
@@ -25,7 +26,14 @@ class GroupController implements IGroupController {
 
       res.status(200).send(groups);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.findAll',
+      });
+
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -37,7 +45,15 @@ class GroupController implements IGroupController {
 
       res.status(201).json(group);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.getById',
+        arguments: req.params,
+      });
+
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -49,7 +65,14 @@ class GroupController implements IGroupController {
 
       res.status(201).json(newGroup);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.create',
+        arguments: req.body,
+      });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -66,7 +89,14 @@ class GroupController implements IGroupController {
 
       res.status(404).send(groupNotFound);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.update',
+        arguments: { body: req.body, params: req.params },
+      });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -82,7 +112,14 @@ class GroupController implements IGroupController {
 
       res.status(404).send(groupNotFound);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.delete',
+        arguments: req.params,
+      });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -94,7 +131,14 @@ class GroupController implements IGroupController {
 
       res.status(200).send(group);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.addUsersToGroup',
+        arguments: req.body,
+      });
+      res.status(500).send(errorMessage);
     }
   }
 
@@ -106,7 +150,14 @@ class GroupController implements IGroupController {
 
       res.status(200).send(groupList);
     } catch (err) {
-      res.status(500).send((err as Error).message);
+      const { message: errorMessage } = err as Error;
+
+      logger.error({
+        errorMessage,
+        methodName: 'GroupController.getUserGroup',
+        arguments: req.params,
+      });
+      res.status(500).send(errorMessage);
     }
   }
 }
