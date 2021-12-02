@@ -1,12 +1,18 @@
 import joi from 'joi';
 import { ContainerTypes, ValidatedRequestSchema } from 'express-joi-validation';
 
-export const userBudy = joi.object({
+const baseData = {
   login: joi.string().alphanum().min(3).max(30).required(),
   password: joi.string().pattern(/^.*(?=.{6,})(?=.*[a-zA-Z])[a-zA-Z0-9]+$/)
     .message('Password should contain letters and numbers').required(),
+};
+
+export const userBudy = joi.object({
+  ...baseData,
   age: joi.number().integer().min(2).max(130),
 });
+
+export const authBody = joi.object(baseData);
 
 export const userParams = joi.object({
   id: joi.string().required(),

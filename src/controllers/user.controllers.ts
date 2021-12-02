@@ -12,7 +12,7 @@ import {
 import { User } from '../types/user.types';
 import { logger } from '../common/logger';
 
-const userService = new UserService(UserModel);
+export const userService = new UserService(UserModel);
 const userNotFound = 'User not found';
 
 interface IUserController {

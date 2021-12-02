@@ -7,6 +7,7 @@ import userModel, { IUserModel } from '../models/user.model';
 interface IUserService {
   findAll: (withDeleted?: boolean) => Promise<IUserModel[]>;
   find: (userID: string) => Promise<IUserModel | null>;
+  findByCredentials: (login: string, password: string) => Promise<IUserModel | null>;
   create: (newUser: User) => Promise<IUserModel>;
   update: (userID: string, userUpdate: User) => Promise<[number, IUserModel[]]>;
   remove: (userID: string) => Promise<[number, IUserModel[]]>;
@@ -34,6 +35,16 @@ export class UserService implements IUserService {
       where: {
         id: userID,
         isdeleted: false,
+      },
+    });
+  }
+
+  findByCredentials = (login: string, password: string) => {
+    return this.userServise.findOne({
+      plain: true,
+      where: {
+        login,
+        password,
       },
     });
   }

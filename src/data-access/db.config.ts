@@ -1,7 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 type pgConfig = {
   url: string;
 };
 
 export const pgConfig: pgConfig = {
-  url: 'postgres://qjdbjbot:zZU4ffVrCuHFMkgB39y5DhZnid1qOj7m@hattie.db.elephantsql.com/qjdbjbot',
+  url: process.env.PG_CONNECT_URL || 'test_url',
 };

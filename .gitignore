@@ -1,6 +1,9 @@
 # From https://github.com/github/gitignore
 #  - Node.gitignore
 
+# Build
+build
+
 # Logs
 logs
 *.log
@@ -15,7 +18,7 @@ package-lock.json
 .DS_Store
 
 # dotenv environment variables file
-.env
+# .env // comment .env file to have ability to run project without setup, will be uncommented after mentor check
 .env.test
 .env.production
 
