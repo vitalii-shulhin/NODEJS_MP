@@ -9,7 +9,7 @@ import { authRouter } from './routes/auth.router';
 import { errorHandler } from './middleware/error.middleware';
 import { isJwtValid } from './common/jwt.check';
 
-const result = dotenv.config();
+dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -22,10 +22,7 @@ app.use('/api/users/', usersRouter);
 app.use('/api/group/', groupRouter);
 app.use('/login', authRouter);
 
-app.listen(process.env.APP_PORT, () => {
-  // tslint:disable-next-line: no-console
-  console.log('process.env.APP_PORT', result);
-
+export default app.listen(process.env.APP_PORT, () => {
   // tslint:disable-next-line: no-console
   console.log(`Listening on port ${process.env.APP_PORT}`);
 });

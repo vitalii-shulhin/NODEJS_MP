@@ -6,14 +6,14 @@ const router = express.Router();
 // GET /api/group/:id
 router.get('/:id', GroupController.getById);
 
-// GET  /api/group/all
+// GET  /api/group
 router.get('/', GroupController.findAll);
 
 // POST  /api/group
 router.post('/', GroupController.create);
 
 // PUT  /api/group
-router.put('/',  GroupController.update);
+router.put('/:id',  GroupController.update);
 
 // GELETE  /api/group/:id
 router.delete('/:id', GroupController.delete);

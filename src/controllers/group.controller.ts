@@ -43,7 +43,7 @@ class GroupController implements IGroupController {
     try {
       const group = await groupService.getById(id);
 
-      res.status(201).json(group);
+      res.status(200).json(group);
     } catch (err) {
       const { message: errorMessage } = err as Error;
 
